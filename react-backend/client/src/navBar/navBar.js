@@ -18,13 +18,12 @@ export default class SidebarMenu extends React.Component {
         <div>
             <Sidebar>
             <Menu iconShape="square">
-              <SubMenu title="Components">
-                <MenuItem>Component 1</MenuItem>
-                <SubMenu title="Sub Component 1">
-                  <MenuItem><Link to="/index/abm">ABM</Link></MenuItem>
-                  <MenuItem><Link to="/index/tablero">Tablero</Link></MenuItem>
+              <MenuItem><Link to="/index/powerbi">PowerBi</Link></MenuItem>
+                <SubMenu title="Sub Component 1" label="ABM">
+                  <MenuItem><Link to="/index/usuarios">Usuarios</Link></MenuItem>
+                  <MenuItem><Link to="/index/roles">Roles</Link></MenuItem>
+                  <MenuItem><Link to="/index/tablero">Tableros</Link></MenuItem>
                 </SubMenu>
-              </SubMenu>
             </Menu>
           </Sidebar>
         </div>

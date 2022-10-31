@@ -44,7 +44,10 @@ class Login extends React.Component{
     };
     let url = "/auth";
     try {
-        fetch(url,settings).then(res => res.json().then(data => console.log(data)));
+        fetch(url,settings).then(res => res.json().then(
+          data => this.setState({isLoggedIn: true})
+          )
+          );
     } catch (e) {
       console.log(e);
     }

@@ -4,10 +4,12 @@ import {
   Routes,Route
 } from "react-router-dom";
 import Tabla from "./tablero/tablero";
-import PowerBiComponente from "./powerBi/powerBi"
+import PowerBiComponente from "./powerBi/powerBi";
 import Login from './login/login';
 import ErrorPage from "./error-page";
-import Contenedor from './contenedor/contenedor'
+import Contenedor from './contenedor/contenedor';
+import Usuarios from  './usuarios/tablero';
+import Roles from './roles/tablero';
 class App extends Component {
   state = {users: []}
 
@@ -22,8 +24,10 @@ class App extends Component {
       <Routes>
         <Route path="/" element={<Login />}/>
         <Route path="/index" element={<Contenedor />}>
-          <Route path="abm" element={<Tabla />}/>
-          <Route path="tablero" element={<PowerBiComponente />}/>
+          <Route path="tablero" element={<Tabla />}/>
+          <Route path="usuarios" element={<Usuarios />}/>
+          <Route path="roles" element={<Roles />}/>
+          <Route path="powerbi" element={<PowerBiComponente />}/>
         </Route>
       </Routes>
     );

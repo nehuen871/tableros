@@ -1,7 +1,5 @@
 import React from 'react';
 import Sidebar from '../navBar/navBar'
-import Tablero from "../tablero/tablero";
-import PowerBiComponente from "../powerBi/powerBi"
 import {
     Outlet,
   } from "react-router-dom";
