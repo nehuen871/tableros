@@ -98,18 +98,16 @@ export default class Tabla extends Component {
     saveProduct() {
         let state = { submitted: true };
 
-        if (this.state.product.name.trim()) {
+        if (this.state.product.nombre.trim()) {
             let products = [...this.state.products];
             let product = {...this.state.product};
             if (this.state.product.id) {
-                const index = this.findIndexById(this.state.product.id);
+                const index = this.findIndexById(this.state.product.idtableros);
 
                 products[index] = product;
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
-                product.id = this.createId();
-                product.image = 'product-placeholder.svg';
                 products.push(product);
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
@@ -140,7 +138,7 @@ export default class Tabla extends Component {
     }
 
     deleteProduct() {
-        let products = this.state.products.filter(val => val.id !== this.state.product.id);
+        let products = this.state.products.filter(val => val.idtableros !== this.state.product.idtableros);
         this.setState({
             products,
             deleteProductDialog: false,
@@ -152,7 +150,7 @@ export default class Tabla extends Component {
     findIndexById(id) {
         let index = -1;
         for (let i = 0; i < this.state.products.length; i++) {
-            if (this.state.products[i].id === id) {
+            if (this.state.products[i].idtableros === id) {
                 index = i;
                 break;
             }
@@ -335,10 +333,10 @@ export default class Tabla extends Component {
                     <div className="field">
                         <label htmlFor="nombre">nombre</label>
                         <InputText id="nombre" value={this.state.product.nombre} onChange={(e) => this.onInputChange(e, 'nombre')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.nombre })} />
-                        {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
+                        {this.state.submitted && !this.state.product.nombre && <small className="p-error">Name is required.</small>}
                     </div>
                     <div className="field">
-                        <label htmlFor="url">Name</label>
+                        <label htmlFor="url">url</label>
                         <InputText id="url" value={this.state.product.url} onChange={(e) => this.onInputChange(e, 'url')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.url })} />
                         {this.state.submitted && !this.state.product.url && <small className="p-error">url is required.</small>}
                     </div>
