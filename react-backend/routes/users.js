@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const mysqlConnection  = require('../db/db.js');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   const query = `SELECT * from usuarios;`;

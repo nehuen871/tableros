@@ -1,6 +1,6 @@
 export class ProductService {
 
     getProducts() {
-        return fetch('/tablero').then(res => res.json()).then(d => d.data);
+        return fetch('/users').then(res => res.json()).then(d => d.data);
     }
 }

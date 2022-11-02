@@ -22,11 +22,12 @@ import './DataTableDemo.css';
 
 export default class Tabla extends Component {
     emptyProduct = {
-        idtableros: null,
+        idusuarios: null,
         nombre: '',
-        url: null,
-        accessToken: '',
-        id: null
+        apellido: null,
+        quit: '',
+        pass: null,
+        roles_idroles: null
     };
 
     constructor(props) {
@@ -102,7 +103,7 @@ export default class Tabla extends Component {
             let products = [...this.state.products];
             let product = {...this.state.product};
             if (this.state.product.id) {
-                const index = this.findIndexById(this.state.product.idtableros);
+                const index = this.findIndexById(this.state.product.idusuarios);
 
                 products[index] = product;
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
@@ -138,7 +139,7 @@ export default class Tabla extends Component {
     }
 
     deleteProduct() {
-        let products = this.state.products.filter(val => val.idtableros !== this.state.product.idtableros);
+        let products = this.state.products.filter(val => val.idusuarios !== this.state.product.idusuarios);
         this.setState({
             products,
             deleteProductDialog: false,
@@ -150,7 +151,7 @@ export default class Tabla extends Component {
     findIndexById(id) {
         let index = -1;
         for (let i = 0; i < this.state.products.length; i++) {
-            if (this.state.products[i].idtableros === id) {
+            if (this.state.products[i].idusuarios === id) {
                 index = i;
                 break;
             }
@@ -313,18 +314,18 @@ export default class Tabla extends Component {
 
                 <div className="card">
                     <Toolbar className="mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>
-
                     <DataTable ref={(el) => this.dt = el} value={this.state.products} selection={this.state.selectedProducts} onSelectionChange={(e) => this.setState({ selectedProducts: e.value })}
                         dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
                         globalFilter={this.state.globalFilter} header={header} responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
-                        <Column field="idtableros" header="idtableros" sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column field="idusuarios" header="idusuarios" sortable style={{ minWidth: '12rem' }}></Column>
                         <Column field="nombre" header="nombre" sortable style={{ minWidth: '16rem' }}></Column>
-                        <Column field="url" header="url"></Column>
-                        <Column field="accessToken" header="accessToken" sortable style={{ minWidth: '8rem' }}></Column>
-                        <Column field="id" header="id" sortable style={{ minWidth: '10rem' }}></Column>
+                        <Column field="apellido" header="url"></Column>
+                        <Column field="quit" header="accessToken" sortable style={{ minWidth: '8rem' }}></Column>
+                        <Column field="pass" header="id" sortable style={{ minWidth: '10rem' }}></Column>
+                        <Column field="roles_idroles" header="id" sortable style={{ minWidth: '10rem' }}></Column>
                         <Column body={this.actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                     </DataTable>
                 </div>
@@ -336,19 +337,24 @@ export default class Tabla extends Component {
                         {this.state.submitted && !this.state.product.nombre && <small className="p-error">Name is required.</small>}
                     </div>
                     <div className="field">
-                        <label htmlFor="url">url</label>
-                        <InputText id="url" value={this.state.product.url} onChange={(e) => this.onInputChange(e, 'url')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.url })} />
-                        {this.state.submitted && !this.state.product.url && <small className="p-error">url is required.</small>}
+                        <label htmlFor="apellido">url</label>
+                        <InputText id="apellido" value={this.state.product.apellido} onChange={(e) => this.onInputChange(e, 'apellido')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.apellido })} />
+                        {this.state.submitted && !this.state.product.apellido && <small className="p-error">apellido is required.</small>}
                     </div>
                     <div className="field">
-                        <label htmlFor="accessToken">accessToken</label>
-                        <InputText id="accessToken" value={this.state.product.accessToken} onChange={(e) => this.onInputChange(e, 'accessToken')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.accessToken })} />
-                        {this.state.submitted && !this.state.product.accessToken && <small className="p-error">accessToken is required.</small>}
+                        <label htmlFor="quit">quit</label>
+                        <InputText id="quit" value={this.state.product.quit} onChange={(e) => this.onInputChange(e, 'quit')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.quit })} />
+                        {this.state.submitted && !this.state.product.quit && <small className="p-error">quit is required.</small>}
                     </div>
                     <div className="field">
-                        <label htmlFor="id">Name</label>
-                        <InputText id="id" value={this.state.product.id} onChange={(e) => this.onInputChange(e, 'id')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.id })} />
-                        {this.state.submitted && !this.state.product.id && <small className="p-error">id is required.</small>}
+                        <label htmlFor="pass">pass</label>
+                        <InputText id="pass" value={this.state.product.pass} onChange={(e) => this.onInputChange(e, 'pass')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.pass })} />
+                        {this.state.submitted && !this.state.product.pass && <small className="p-error">pass is required.</small>}
+                    </div>
+                    <div className="field">
+                        <label htmlFor="roles_idroles">roles_idroles</label>
+                        <InputText id="roles_idroles" value={this.state.product.roles_idroles} onChange={(e) => this.onInputChange(e, 'pass')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.roles_idroles })} />
+                        {this.state.submitted && !this.state.product.roles_idroles && <small className="p-error">pass is required.</small>}
                     </div>
 
                 </Dialog>
