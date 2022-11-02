@@ -20,7 +20,7 @@ const Tablero = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [tableData, setTableData] = useState(() => data);
   const [validationErrors, setValidationErrors] = useState({});
-
+  console.log(data);
   const handleCreateNewRow = (values) => {
     tableData.push(values);
     setTableData([...tableData]);
