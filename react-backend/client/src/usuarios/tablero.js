@@ -98,32 +98,27 @@ export default class Tabla extends Component {
 
     saveProduct() {
         let state = { submitted: true };
+        let products = [...this.state.products];
+        let product = {...this.state.product};
+        if (this.state.product.idusuarios) {
+            const index = this.findIndexById(this.state.product.idusuarios);
 
-        if (this.state.product.nombre.trim()) {
-            let products = [...this.state.products];
-            let product = {...this.state.product};
-            if (this.state.product.idusuarios) {
-                const index = this.findIndexById(this.state.product.idusuarios);
-
-                products[index] = product;
-                console.log(product);
-                this.productService.updateProducts({product});
-                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-            }
-            else {
-                console.log(product);
-                products.push(product);
-                this.productService.insertProduct({product});
-                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-            }
-
-            state = {
-                ...state,
-                products,
-                productDialog: false,
-                product: this.emptyProduct
-            };
+            products[index] = product;
+            this.productService.updateProducts({product});
+            this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
         }
+        else {
+            products.push(product);
+            this.productService.insertProduct({product});
+            this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+        }
+
+        state = {
+            ...state,
+            products,
+            productDialog: false,
+            product: this.emptyProduct
+        };
 
         this.setState(state);
     }

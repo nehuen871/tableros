@@ -22,6 +22,7 @@ import './DataTableDemo.css';
 
 export default class Tabla extends Component {
     emptyProduct = {
+        idtablerohasroles:null,
         tableros_idtableros: null,
         roles_idroles: null
     };
@@ -95,17 +96,18 @@ export default class Tabla extends Component {
     saveProduct() {
         let state = { submitted: true };
 
-        if (this.state.product.nombre.trim()) {
             let products = [...this.state.products];
             let product = {...this.state.product};
-            if (this.state.product.tableros_idtableros) {
-                const index = this.findIndexById(this.state.product.tableros_idtableros);
+            if (this.state.product.idtablerohasroles) {
+                const index = this.findIndexById(this.state.product.idtablerohasroles);
 
                 products[index] = product;
+                this.productService.updateProducts({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
                 products.push(product);
+                this.productService.insertProduct({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
@@ -115,7 +117,7 @@ export default class Tabla extends Component {
                 productDialog: false,
                 product: this.emptyProduct
             };
-        }
+        
 
         this.setState(state);
     }
@@ -135,19 +137,21 @@ export default class Tabla extends Component {
     }
 
     deleteProduct() {
-        let products = this.state.products.filter(val => val.tableros_idtableros !== this.state.product.tableros_idtableros);
+        let products = this.state.products.filter(val => val.idtablerohasroles !== this.state.product.idtablerohasroles);
         this.setState({
             products,
             deleteProductDialog: false,
             product: this.emptyProduct
         });
+        let product = this.state.product;
+        this.productService.deleteProducts({product});
         this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 
     findIndexById(id) {
         let index = -1;
         for (let i = 0; i < this.state.products.length; i++) {
-            if (this.state.products[i].tableros_idtableros === id) {
+            if (this.state.products[i].idtablerohasroles === id) {
                 index = i;
                 break;
             }
@@ -317,13 +321,14 @@ export default class Tabla extends Component {
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
                         globalFilter={this.state.globalFilter} header={header} responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                        <Column field="idtablerohasroles" header="idtablerohasroles" sortable style={{ minWidth: '12rem' }}></Column>
                         <Column field="tableros_idtableros" header="tableros_idtableros" sortable style={{ minWidth: '12rem' }}></Column>
                         <Column field="roles_idroles" header="roles_idroles" sortable style={{ minWidth: '16rem' }}></Column>
                         <Column body={this.actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                     </DataTable>
                 </div>
 
-                <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}>
+                <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}> 
                     <div className="field">
                         <label htmlFor="tableros_idtableros">tableros_idtableros</label>
                         <InputText id="tableros_idtableros" value={this.state.product.tableros_idtableros} onChange={(e) => this.onInputChange(e, 'tableros_idtableros')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.tableros_idtableros })} />

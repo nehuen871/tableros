@@ -23,7 +23,7 @@ router.post('/insert', (req, res) => {
   let {nombre} = req.body;
   /**INSERT INTO `tableros`.`tableros` (`nombre`, `url`, `accessToken`, `id`) VALUES ('test', 'https://app.powerbi.com/view?r=eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', 'eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', '37f58113-3e68-464a-bba2-366538375822');
  */
-  const query = `INSERT INTO roles ('nombre) VALUES ('?');`;
+  const query = `INSERT INTO roles (nombre) VALUES (?);`;
   mysqlConnection.query(query,[nombre], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
@@ -43,7 +43,7 @@ router.post('/insert', (req, res) => {
 router.post('/edit', (req, res) => {
   console.log(req.body);
   let {nombre,idroles} = req.body;
-  const query = `UPDATE roles SET nombre='?' WHERE idroles = '?';`;
+  const query = `UPDATE roles SET nombre=? WHERE idroles = ?;`;
   mysqlConnection.query(query,[nombre,idroles], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){

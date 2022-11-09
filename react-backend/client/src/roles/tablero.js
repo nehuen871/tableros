@@ -102,10 +102,12 @@ export default class Tabla extends Component {
                 const index = this.findIndexById(this.state.product.idroles);
 
                 products[index] = product;
+                this.productService.updateProducts({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
                 products.push(product);
+                this.productService.insertProduct({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
@@ -141,6 +143,8 @@ export default class Tabla extends Component {
             deleteProductDialog: false,
             product: this.emptyProduct
         });
+        let product = this.state.product;
+        this.productService.deleteProducts({product});
         this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 

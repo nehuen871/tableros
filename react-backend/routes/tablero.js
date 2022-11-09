@@ -22,8 +22,8 @@ router.post('/insert', (req, res) => {
   let {nombre,url,accessToken,id} = req.body;
   /**INSERT INTO `tableros`.`tableros` (`nombre`, `url`, `accessToken`, `id`) VALUES ('test', 'https://app.powerbi.com/view?r=eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', 'eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', '37f58113-3e68-464a-bba2-366538375822');
  */
-  const query = `INSERT INTO tableros ('nombre, 'url', 'accessToken', 'id') VALUES ('?','?','?','?');`;
-  mysqlConnection.query(query,[quit,pass], (err, rows, fields) => {
+  const query = `INSERT INTO tableros (nombre, url, accessToken, id) VALUES (?,?,?,?);`;
+  mysqlConnection.query(query,[nombre,url,accessToken,id], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
         res.json(0);
@@ -42,7 +42,7 @@ router.post('/insert', (req, res) => {
 router.post('/edit', (req, res) => {
   console.log(req.body);
   let {nombre,url,accessToken,id,idtableros} = req.body;
-  const query = `UPDATE tableros SET nombre='?', url='?', accessToken='?', id='?' WHERE idtableros = '?';`;
+  const query = `UPDATE tableros SET nombre=?, url=?, accessToken=?, id=? WHERE idtableros = ?;`;
   mysqlConnection.query(query,[nombre,url,accessToken,id,idtableros], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
@@ -60,9 +60,9 @@ router.post('/edit', (req, res) => {
 /**DELETE FROM `tableros`.`tableros` WHERE (`idtableros` = '4'); */
 router.post('/delete', (req, res) => {
   console.log(req.body);
-  let {quiidtablerost} = req.body;
+  let {idtableros} = req.body;
   const query = `DELETE from tableros WHERE idtableros = ?;`;
-  mysqlConnection.query(query,[quit], (err, rows, fields) => {
+  mysqlConnection.query(query,[idtableros], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
         res.json(0);

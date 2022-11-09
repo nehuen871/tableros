@@ -105,10 +105,12 @@ export default class Tabla extends Component {
                 const index = this.findIndexById(this.state.product.idtableros);
 
                 products[index] = product;
+                this.productService.updateProducts({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
                 products.push(product);
+                this.productService.insertProduct({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
@@ -144,6 +146,8 @@ export default class Tabla extends Component {
             deleteProductDialog: false,
             product: this.emptyProduct
         });
+        let product = this.state.product;
+        this.productService.deleteProducts({product});
         this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 
@@ -346,7 +350,7 @@ export default class Tabla extends Component {
                         {this.state.submitted && !this.state.product.accessToken && <small className="p-error">accessToken is required.</small>}
                     </div>
                     <div className="field">
-                        <label htmlFor="id">Name</label>
+                        <label htmlFor="id">id</label>
                         <InputText id="id" value={this.state.product.id} onChange={(e) => this.onInputChange(e, 'id')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.id })} />
                         {this.state.submitted && !this.state.product.id && <small className="p-error">id is required.</small>}
                     </div>
