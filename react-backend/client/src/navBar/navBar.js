@@ -1,4 +1,5 @@
 import React,{ useState } from 'react'
+import { ProductService } from '../rolesTableros/ProductService';
 import {
   Sidebar,
   Menu,
@@ -12,6 +13,25 @@ import {
 } from "react-router-dom";
 
 export default class SidebarMenu extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        products: null,
+        productDialog: false,
+        deleteProductDialog: false,
+        deleteProductsDialog: false,
+        product: this.emptyProduct,
+        selectedProducts: null,
+        submitted: false,
+        globalFilter: null
+    };
+
+    this.productService = new ProductService();
+}
+componentDidMount() {
+  this.productService.getTablerosRoles().then(data => this.setState({ products:data }));
+}
   render() {
     return(
       <div>

@@ -18,6 +18,24 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.post('/getTablerosRoles', (req, res) => {
+  let {roles_idroles} = req.body;
+  /**INSERT INTO `tableros`.`tableros` (`nombre`, `url`, `accessToken`, `id`) VALUES ('test', 'https://app.powerbi.com/view?r=eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', 'eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', '37f58113-3e68-464a-bba2-366538375822');
+ */
+  const query = `SELECT * FROM tableros.tableros_has_roles where roles_idroles= ?;`;
+  mysqlConnection.query(query,[roles_idroles], (err, rows, fields) => {
+    if(!err) {
+      if(rows.length == 0){
+        res.json(0);
+      }else{
+        res.json(rows);
+      }
+    } else {
+      res.json(err);
+    }
+  });
+});
+
 router.post('/insert', (req, res) => {
   let {tableros_idtableros} = req.body;
   let {roles_idroles} = req.body;
