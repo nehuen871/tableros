@@ -10,6 +10,8 @@ import ErrorPage from "./error-page";
 import Contenedor from './contenedor/contenedor';
 import Usuarios from  './usuarios/tablero';
 import Roles from './roles/tablero';
+import RolesTableros from './rolesTableros/tablero';
+
 class App extends Component {
   state = {users: []}
 
@@ -28,6 +30,7 @@ class App extends Component {
           <Route path="usuarios" element={<Usuarios />}/>
           <Route path="roles" element={<Roles />}/>
           <Route path="powerbi" element={<PowerBiComponente />}/>
+          <Route path="tablerosRoles" element={<RolesTableros />}/>
         </Route>
       </Routes>
     );

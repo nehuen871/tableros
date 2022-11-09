@@ -23,6 +23,8 @@ export default class SidebarMenu extends React.Component {
                   <MenuItem><Link to="/index/usuarios">Usuarios</Link></MenuItem>
                   <MenuItem><Link to="/index/roles">Roles</Link></MenuItem>
                   <MenuItem><Link to="/index/tablero">Tableros</Link></MenuItem>
+                  <MenuItem><Link to="/index/tablerosRoles">Tableros Roles</Link></MenuItem>
+                  
                 </SubMenu>
             </Menu>
           </Sidebar>

@@ -22,11 +22,7 @@ import './DataTableDemo.css';
 
 export default class Tabla extends Component {
     emptyProduct = {
-        idusuarios: null,
-        nombre: '',
-        apellido: null,
-        quit: '',
-        pass: null,
+        tableros_idtableros: null,
         roles_idroles: null
     };
 
@@ -70,7 +66,7 @@ export default class Tabla extends Component {
     }
 
     componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
+        this.productService.getProducts().then(data => this.setState({ products:data }));
     }
 
     openNew() {
@@ -103,7 +99,7 @@ export default class Tabla extends Component {
             let products = [...this.state.products];
             let product = {...this.state.product};
             if (this.state.product.id) {
-                const index = this.findIndexById(this.state.product.idusuarios);
+                const index = this.findIndexById(this.state.product.tableros_idtableros);
 
                 products[index] = product;
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
@@ -139,7 +135,7 @@ export default class Tabla extends Component {
     }
 
     deleteProduct() {
-        let products = this.state.products.filter(val => val.idusuarios !== this.state.product.idusuarios);
+        let products = this.state.products.filter(val => val.tableros_idtableros !== this.state.product.tableros_idtableros);
         this.setState({
             products,
             deleteProductDialog: false,
@@ -151,7 +147,7 @@ export default class Tabla extends Component {
     findIndexById(id) {
         let index = -1;
         for (let i = 0; i < this.state.products.length; i++) {
-            if (this.state.products[i].idusuarios === id) {
+            if (this.state.products[i].tableros_idtableros === id) {
                 index = i;
                 break;
             }
@@ -314,49 +310,30 @@ export default class Tabla extends Component {
 
                 <div className="card">
                     <Toolbar className="mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>
+
                     <DataTable ref={(el) => this.dt = el} value={this.state.products} selection={this.state.selectedProducts} onSelectionChange={(e) => this.setState({ selectedProducts: e.value })}
                         dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
                         globalFilter={this.state.globalFilter} header={header} responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
-                        <Column field="idusuarios" header="idusuarios" sortable style={{ minWidth: '12rem' }}></Column>
-                        <Column field="nombre" header="nombre" sortable style={{ minWidth: '16rem' }}></Column>
-                        <Column field="apellido" header="apellido"></Column>
-                        <Column field="quit" header="quit" sortable style={{ minWidth: '8rem' }}></Column>
-                        <Column field="pass" header="pass" sortable style={{ minWidth: '10rem' }}></Column>
-                        <Column field="roles_idroles" header="roles_idroles" sortable style={{ minWidth: '10rem' }}></Column>
+                        <Column field="tableros_idtableros" header="tableros_idtableros" sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column field="roles_idroles" header="roles_idroles" sortable style={{ minWidth: '16rem' }}></Column>
                         <Column body={this.actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                     </DataTable>
                 </div>
 
                 <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}>
                     <div className="field">
-                        <label htmlFor="nombre">nombre</label>
-                        <InputText id="nombre" value={this.state.product.nombre} onChange={(e) => this.onInputChange(e, 'nombre')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.nombre })} />
-                        {this.state.submitted && !this.state.product.nombre && <small className="p-error">Name is required.</small>}
-                    </div>
-                    <div className="field">
-                        <label htmlFor="apellido">url</label>
-                        <InputText id="apellido" value={this.state.product.apellido} onChange={(e) => this.onInputChange(e, 'apellido')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.apellido })} />
-                        {this.state.submitted && !this.state.product.apellido && <small className="p-error">apellido is required.</small>}
-                    </div>
-                    <div className="field">
-                        <label htmlFor="quit">quit</label>
-                        <InputText id="quit" value={this.state.product.quit} onChange={(e) => this.onInputChange(e, 'quit')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.quit })} />
-                        {this.state.submitted && !this.state.product.quit && <small className="p-error">quit is required.</small>}
-                    </div>
-                    <div className="field">
-                        <label htmlFor="pass">pass</label>
-                        <InputText id="pass" value={this.state.product.pass} onChange={(e) => this.onInputChange(e, 'pass')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.pass })} />
-                        {this.state.submitted && !this.state.product.pass && <small className="p-error">pass is required.</small>}
+                        <label htmlFor="tableros_idtableros">tableros_idtableros</label>
+                        <InputText id="tableros_idtableros" value={this.state.product.tableros_idtableros} onChange={(e) => this.onInputChange(e, 'tableros_idtableros')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.tableros_idtableros })} />
+                        {this.state.submitted && !this.state.product.tableros_idtableros && <small className="p-error">tableros_idtableros is required.</small>}
                     </div>
                     <div className="field">
                         <label htmlFor="roles_idroles">roles_idroles</label>
-                        <InputText id="roles_idroles" value={this.state.product.roles_idroles} onChange={(e) => this.onInputChange(e, 'pass')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.roles_idroles })} />
-                        {this.state.submitted && !this.state.product.roles_idroles && <small className="p-error">pass is required.</small>}
+                        <InputText id="roles_idroles" value={this.state.product.roles_idroles} onChange={(e) => this.onInputChange(e, 'roles_idroles')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.roles_idroles })} />
+                        {this.state.submitted && !this.state.product.roles_idroles && <small className="p-error">roles_idroles is required.</small>}
                     </div>
-
                 </Dialog>
 
                 <Dialog visible={this.state.deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={this.hideDeleteProductDialog}>
