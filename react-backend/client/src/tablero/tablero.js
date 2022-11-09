@@ -248,11 +248,10 @@ export default class Tabla extends Component {
         return (
             <React.Fragment>
                 <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={this.openNew} />
-                <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={this.confirmDeleteSelected} disabled={!this.state.selectedProducts || !this.state.selectedProducts.length} />
             </React.Fragment>
         )
     }
-
+/**<Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={this.confirmDeleteSelected} disabled={!this.state.selectedProducts || !this.state.selectedProducts.length} /> */
     rightToolbarTemplate() {
         return (
             <React.Fragment>
@@ -316,7 +315,7 @@ export default class Tabla extends Component {
                 <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
-                    <Toolbar className="mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>
+                    <Toolbar className="mb-4" left={this.leftToolbarTemplate} /**right={this.rightToolbarTemplate}**/></Toolbar>
 
                     <DataTable ref={(el) => this.dt = el} value={this.state.products} selection={this.state.selectedProducts} onSelectionChange={(e) => this.setState({ selectedProducts: e.value })}
                         dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
