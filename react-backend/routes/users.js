@@ -19,10 +19,8 @@ router.get('/', function(req, res, next) {
 router.post('/insert', (req, res) => {
   console.log(req.body);
   let {nombre,apellido,quit,pass,roles_idroles} = req.body;
-  /**INSERT INTO `usuarios`.`usuarios` (`nombre`, `url`, `accessToken`, `id`) VALUES ('test', 'https://app.powerbi.com/view?r=eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', 'eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9', '37f58113-3e68-464a-bba2-366538375822');
- */
-  const query = `INSERT INTO usuarios ('nombre, 'apellido', 'quit', 'pass','roles_idroles') VALUES ('?','?','?','?','?');`;
-  mysqlConnection.query(query,[quit,pass], (err, rows, fields) => {
+  const query = `INSERT INTO usuarios (nombre,apellido,quit,pass,roles_idroles) VALUES (?,?,?,?,?);`;
+  mysqlConnection.query(query,[nombre,apellido,quit,pass,roles_idroles], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
         res.json(0);
@@ -41,7 +39,7 @@ router.post('/insert', (req, res) => {
 router.post('/edit', (req, res) => {
   console.log(req.body);
   let {nombre,apellido,quit,pass,roles_idroles,idusuarios} = req.body;
-  const query = `UPDATE usuarios SET nombre='?', apellido='?', quit='?', pass='?',roles_idroles='?' WHERE idusuarios = '?';`;
+  const query = `UPDATE usuarios SET nombre=?, apellido=?, quit=?, pass=?,roles_idroles=? WHERE idusuarios = ?;`;
   mysqlConnection.query(query,[nombre,apellido,quit,pass,roles_idroles,idusuarios], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
@@ -61,7 +59,7 @@ router.post('/delete', (req, res) => {
   console.log(req.body);
   let {idusuarios} = req.body;
   const query = `DELETE from usuarios WHERE idusuarios = ?;`;
-  mysqlConnection.query(query,[quit], (err, rows, fields) => {
+  mysqlConnection.query(query,[idusuarios], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
         res.json(0);

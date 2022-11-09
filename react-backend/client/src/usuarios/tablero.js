@@ -102,14 +102,18 @@ export default class Tabla extends Component {
         if (this.state.product.nombre.trim()) {
             let products = [...this.state.products];
             let product = {...this.state.product};
-            if (this.state.product.id) {
+            if (this.state.product.idusuarios) {
                 const index = this.findIndexById(this.state.product.idusuarios);
 
                 products[index] = product;
+                console.log(product);
+                this.productService.updateProducts({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
+                console.log(product);
                 products.push(product);
+                this.productService.insertProduct({product});
                 this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
@@ -145,6 +149,8 @@ export default class Tabla extends Component {
             deleteProductDialog: false,
             product: this.emptyProduct
         });
+        let product = this.state.product;
+        this.productService.deleteProducts({product});
         this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 
@@ -337,7 +343,7 @@ export default class Tabla extends Component {
                         {this.state.submitted && !this.state.product.nombre && <small className="p-error">Name is required.</small>}
                     </div>
                     <div className="field">
-                        <label htmlFor="apellido">url</label>
+                        <label htmlFor="apellido">apellido</label>
                         <InputText id="apellido" value={this.state.product.apellido} onChange={(e) => this.onInputChange(e, 'apellido')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.apellido })} />
                         {this.state.submitted && !this.state.product.apellido && <small className="p-error">apellido is required.</small>}
                     </div>
@@ -353,7 +359,7 @@ export default class Tabla extends Component {
                     </div>
                     <div className="field">
                         <label htmlFor="roles_idroles">roles_idroles</label>
-                        <InputText id="roles_idroles" value={this.state.product.roles_idroles} onChange={(e) => this.onInputChange(e, 'pass')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.roles_idroles })} />
+                        <InputText id="roles_idroles" value={this.state.product.roles_idroles} onChange={(e) => this.onInputChange(e, 'roles_idroles')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.roles_idroles })} />
                         {this.state.submitted && !this.state.product.roles_idroles && <small className="p-error">pass is required.</small>}
                     </div>
 

@@ -101,7 +101,7 @@ export default class Tabla extends Component {
         if (this.state.product.nombre.trim()) {
             let products = [...this.state.products];
             let product = {...this.state.product};
-            if (this.state.product.id) {
+            if (this.state.product.idtableros) {
                 const index = this.findIndexById(this.state.product.idtableros);
 
                 products[index] = product;
