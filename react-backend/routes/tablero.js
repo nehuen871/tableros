@@ -17,6 +17,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/tablerobyid/:id', function(req, res, next) {
+  let {id} = req.params; 
+  const query = `SELECT * from tableros where idtabler = ${id};`;
+  mysqlConnection.query(query, (err, rows, fields) => {
+    if(!err) {
+      if(rows.length == 0){
+        res.json(0);
+      }else{
+        res.json({data:rows});
+      }
+    } else {
+      res.json(err);
+    }
+  });
+});
+
 router.post('/insert', (req, res) => {
   console.log(req.body);
   let {nombre,url,accessToken,id} = req.body;

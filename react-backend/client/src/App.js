@@ -29,7 +29,7 @@ class App extends Component {
           <Route path="tablero" element={<Tabla />}/>
           <Route path="usuarios" element={<Usuarios />}/>
           <Route path="roles" element={<Roles />}/>
-          <Route path="powerbi" element={<PowerBiComponente />}/>
+          <Route exact path="powerbi/:id/:token" element={<PowerBiComponente />}/>
           <Route path="tablerosRoles" element={<RolesTableros />}/>
         </Route>
       </Routes>

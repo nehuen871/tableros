@@ -12,15 +12,22 @@ import {
   Navigate,
 } from "react-router-dom";
 import {useEffect,useState} from 'react';
+import { LogintService } from './loginService';
+import Contenedor from '../contenedor/contenedor';
 let row = [];
 class Login extends React.Component{
   constructor(props) {
     super(props);
+    this.logintService = new LogintService();
     this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogStatus = this.handleLogStatus.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = {isLoggedIn: false};
+    this.state = {
+      isLoggedIn: false,
+      dataUser:null
+    };
   }
 
   handleEmailChange(e) {
@@ -34,30 +41,13 @@ class Login extends React.Component{
       quit: this.state.email,
       pass: this.state.password
     });
-    const settings = {
-      method: 'POST',
-      body: JSON.stringify(row[0]),
-      headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-      }
-    };
-    let url = "/auth";
-    try {
-        fetch(url,settings).then(res => res.json().then(
-          data => this.setState({isLoggedIn: true})
-          )
-          );
-    } catch (e) {
-      console.log(e);
-    }
-
-    /*const response = fetch('/auth');
-    var data = response.json();
-    if (response.status !== 200) throw Error(data.message);
-      this.setState({isLoggedIn: true});*/
+    this.logintService.getUser({row:row[0]}).then(data => this.setState({dataUser:data})).then(this.handleLogStatus());
   }
-  
+  handleLogStatus(){
+    if(this.state.dataUser != null){
+      this.setState({isLoggedIn: true});
+    }
+  }
   handleLogoutClick() {
     this.setState({isLoggedIn: false});
   }
@@ -65,7 +55,7 @@ class Login extends React.Component{
     const isLoggedIn = this.state.isLoggedIn;
     let contenedor;
     if (isLoggedIn) {      
-      contenedor = <Navigate to="/index/tablero"/>;
+      contenedor = <Contenedor roles_idroles={this.state.dataUser.data.roles_idroles}/>;
     } else {      
       contenedor =  <MDBContainer className="p-3 my-5 d-flex flex-column w-100"> 
       <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' value={this.state.email || ""} onChange={this.handleEmailChange}/>

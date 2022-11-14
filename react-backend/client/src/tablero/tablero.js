@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from './ProductService';
+import { TableroService } from './ProductService';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
@@ -43,7 +43,7 @@ export default class Tabla extends Component {
             globalFilter: null
         };
 
-        this.productService = new ProductService();
+        this.productService = new TableroService();
         this.leftToolbarTemplate = this.leftToolbarTemplate.bind(this);
         this.rightToolbarTemplate = this.rightToolbarTemplate.bind(this);
         this.imageBodyTemplate = this.imageBodyTemplate.bind(this);

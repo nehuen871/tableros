@@ -7,15 +7,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
   let {quit,pass} = req.body;
-  const query = `SELECT idusuarios from usuarios where quit = ? and pass = ?;`;
+  const query = `SELECT * from usuarios where quit = ? and pass = ?;`;
   mysqlConnection.query(query,[quit,pass], (err, rows, fields) => {
     if(!err) {
       if(rows.length == 0){
         res.json(0);
       }else{
-        res.json(rows);
+        res.json({data:rows[0]});
       }
     } else {
       res.json(err);

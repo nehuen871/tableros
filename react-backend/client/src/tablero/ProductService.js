@@ -1,8 +1,9 @@
-export class ProductService {
+export class TableroService {
 
     getProducts() {
         return fetch('/tablero').then(res => res.json()).then(d => d.data);
     }
+
     updateProducts(data={}){
         async function postData(url = '', data = {}) {
             // Default options are marked with *
@@ -29,7 +30,6 @@ export class ProductService {
     }
     deleteProducts(data={}){
         async function postData(url = '', data = {}) {
-            console.log(data.product);
             // Default options are marked with *
             const response = await fetch(url, {
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
