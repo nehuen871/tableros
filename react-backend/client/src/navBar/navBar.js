@@ -9,7 +9,6 @@ import {
 } from "react-pro-sidebar";
 import {
   BrowserRouter as Router,
-  Outlet,
   Link
 } from "react-router-dom";
 
@@ -52,18 +51,15 @@ async postData(url = '', data = {}) {
   //return response.json(); // parses JSON response into native JavaScript objects
 }
 componentDidMount() {
+  console.log(this.props.roles_idroles);
   this.postData('/tablerosroles/gettablerosroles/',{roles_idroles:this.props.roles_idroles});
   this.handleLogStatus();
 }
 handleLogStatus(){
-  if(this.props.roles_idroles != null){
-    this.setState({isLoggedIn: true});
+  if(this.props.login != true){
+    window.location.replace("/login");
   }
 }
-/**               {this.data1.map((value, index) => {
-                  return value;
-                })}
-                })} */
   render() {
     let i = 0;
     let renderLinks = [];
@@ -74,13 +70,12 @@ handleLogStatus(){
         <div>
             <Sidebar>
             <Menu iconShape="square">
-              {dataUser && dataUser.data.map(item =>  <MenuItem><Link to={"/index/powerbi/"+item.accessToken+"/"+item.id}>{item.nombre}</Link></MenuItem> )}
-              
+              {dataUser && dataUser.data.map(item =>  <MenuItem><Link to={"/powerbi/"+item.accessToken+"/"+item.id}>{item.nombre}</Link></MenuItem> )}
                 <SubMenu title="Sub Component 1" label="ABM">
-                  <MenuItem><Link to="/index/usuarios">Usuarios</Link></MenuItem>
-                  <MenuItem><Link to="/index/roles">Roles</Link></MenuItem>
-                  <MenuItem><Link to="/index/tablero">Tableros</Link></MenuItem>
-                  <MenuItem><Link to="/index/tablerosRoles">Tableros Roles</Link></MenuItem>
+                  <MenuItem><Link to="/usuarios">Usuarios</Link></MenuItem>
+                  <MenuItem><Link to="/roles">Roles</Link></MenuItem>
+                  <MenuItem><Link to="/tablero">Tableros</Link></MenuItem>
+                  <MenuItem><Link to="/tablerosRoles">Tableros Roles</Link></MenuItem>
                   
                 </SubMenu>
             </Menu>

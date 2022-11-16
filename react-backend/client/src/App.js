@@ -13,19 +13,11 @@ import Roles from './roles/tablero';
 import RolesTableros from './rolesTableros/tablero';
 
 class App extends Component {
-  state = {users: []}
-
-  componentDidMount() {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({ users }));
-  }
-
   render() {
     return (
       <Routes>
-        <Route path="/" element={<Login />}/>
-        <Route path="/index" element={<Contenedor />}>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/" element={<Contenedor />}>
           <Route path="tablero" element={<Tabla />}/>
           <Route path="usuarios" element={<Usuarios />}/>
           <Route path="roles" element={<Roles />}/>
