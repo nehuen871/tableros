@@ -16,7 +16,6 @@ class App extends Component {
   render() {
     return (
       <Routes>
-        <Route path="/login" element={<Login />}/>
         <Route path="/" element={<Contenedor />}>
           <Route path="tablero" element={<Tabla />}/>
           <Route path="usuarios" element={<Usuarios />}/>
@@ -24,6 +23,7 @@ class App extends Component {
           <Route path="powerbi/:token/:id" element={<PowerBiComponente />}/>
           <Route path="tablerosRoles" element={<RolesTableros />}/>
         </Route>
+        <Route path="/login" element={<Login />}/>
       </Routes>
     );
   }

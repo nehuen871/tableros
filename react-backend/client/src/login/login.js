@@ -14,6 +14,7 @@ import {
 import {useEffect,useState} from 'react';
 import { LogintService } from './loginService';
 import Contenedor from '../contenedor/contenedor';
+import UserContext,{ContextLogin} from '../context/context'
 let row = [];
 
 class Login extends React.Component{
@@ -45,13 +46,19 @@ class Login extends React.Component{
     this.logintService.getUser({row:row[0]}).then(data => this.setState({dataUser:data})).then(this.handleLogStatus());
   }
   handleLogStatus(){
-    console.log(this.state.dataUser.data);
+    const {islogin,userIdRol,logIn,logOut} = this.context;
+    
     if(this.state.dataUser != null){
+      logIn(true,this.state.dataUser.data.roles_idroles);
+      console.log(islogin);
+      console.log(userIdRol);
       this.isLoggedIn = true;
     }
   }
   handleLogoutClick() {
+    const {islogin,userIdRol,logIn,logOut} = this.context;
     this.isLoggedIn = false;
+    logOut();
   }
   render() {
     const isLoggedIn = this.isLoggedIn;
@@ -102,4 +109,5 @@ class Login extends React.Component{
   }
 }
 
+Login.contextType = UserContext;
 export default Login;

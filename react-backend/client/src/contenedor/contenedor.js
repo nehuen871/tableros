@@ -1,17 +1,17 @@
 import React from 'react';
 import Sidebar from '../navBar/navBar'
 import {
-    Outlet,
-    useLocation
+    Outlet
   } from "react-router-dom";
-  export default class SidebarMenu extends React.Component {
+import UserContext,{ContextLogin,UserConsumer} from '../context/context'
+
+export default class SidebarMenu extends React.Component {
+    static contextType = UserContext;
     constructor(props) {
         super(props);
     }
     componentDidMount(){
-        console.log(this.props.roles_idroles);
         if(this.props.login != true){
-            console.log("redirecciona");
             window.location.replace("/login");
         }
     }
@@ -19,7 +19,17 @@ import {
         return(
             <div className='row'>
                 <div className="col-md-2">
-                    <div className="col-sm-auto"><Sidebar roles_idroles={this.props.roles_idroles} login={this.props.login}/></div>
+                    <UserConsumer>
+                        {
+                            props => {
+                                const {islogin,userIdRol,logIn,logOut} = this.context;
+                                return(
+                                    <div className="col-sm-auto"><Sidebar roles_idroles={userIdRol} login={islogin}/></div>
+                                );
+                            }
+                        }
+                        
+                    </UserConsumer>
                 </div>
                 <div className='col-md-10'>
                     <Outlet roles_idroles={this.props.roles_idroles}/>

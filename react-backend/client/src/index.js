@@ -10,14 +10,17 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+import UserContext,{ContextLogin} from './context/context'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     <ProSidebarProvider>
-      <Header />
-      <App />
-      <Footer />
+      <ContextLogin>
+        <Header />
+        <App />
+        <Footer />
+      </ContextLogin>
     </ProSidebarProvider>
     </BrowserRouter>
   </React.StrictMode>

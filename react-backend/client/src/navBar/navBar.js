@@ -11,6 +11,7 @@ import {
   BrowserRouter as Router,
   Link
 } from "react-router-dom";
+import UserContext,{ContextLogin} from '../context/context'
 
 export default class SidebarMenu extends React.Component {
   constructor(props) {
@@ -51,7 +52,7 @@ async postData(url = '', data = {}) {
   //return response.json(); // parses JSON response into native JavaScript objects
 }
 componentDidMount() {
-  console.log(this.props.roles_idroles);
+  const {islogin,userIdRol,logIn,logOut} = this.context;
   this.postData('/tablerosroles/gettablerosroles/',{roles_idroles:this.props.roles_idroles});
   this.handleLogStatus();
 }
@@ -64,7 +65,7 @@ handleLogStatus(){
     let i = 0;
     let renderLinks = [];
     const { dataUser } = this.state;
-    dataUser && console.log(dataUser.data.map(item => item));
+    //dataUser && console.log(dataUser.data.map(item => item));
     return(
       <div>
         <div>
@@ -85,3 +86,5 @@ handleLogStatus(){
     );
   }
 }
+
+SidebarMenu.contextType = UserContext;
