@@ -49,9 +49,8 @@ class Login extends React.Component{
     const {islogin,userIdRol,logIn,logOut} = this.context;
     
     if(this.state.dataUser != null){
+      console.log(this.state.dataUser);
       logIn(true,this.state.dataUser.data.roles_idroles);
-      console.log(islogin);
-      console.log(userIdRol);
       this.isLoggedIn = true;
     }
   }
@@ -62,8 +61,6 @@ class Login extends React.Component{
   }
   render() {
     const isLoggedIn = this.isLoggedIn;
-    //if (isLoggedIn) {      
-    //  contenedor = <Contenedor roles_idroles={this.state.dataUser.data.roles_idroles}/>;
 
     return (
       <div>    

@@ -11,7 +11,7 @@ export class ContextLogin extends Component{
     }
 
 
-    logIn = (rol,log) => {
+    logIn = (log,rol) => {
         this.setState({
             islogin:log,
             userIdRol:rol

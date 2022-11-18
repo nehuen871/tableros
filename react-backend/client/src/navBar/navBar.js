@@ -26,6 +26,7 @@ export default class SidebarMenu extends React.Component {
     this.tableroService = new TableroService();
     this.handleLogStatus = this.handleLogStatus.bind(this);
     this.postData = this.postData.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
 }
 async postData(url = '', data = {}) {
   let i = 0;
@@ -53,17 +54,25 @@ async postData(url = '', data = {}) {
 }
 componentDidMount() {
   const {islogin,userIdRol,logIn,logOut} = this.context;
-  this.postData('/tablerosroles/gettablerosroles/',{roles_idroles:this.props.roles_idroles});
+  this.postData('/tablerosroles/gettablerosroles/',{roles_idroles:userIdRol});
   this.handleLogStatus();
 }
 handleLogStatus(){
-  if(this.props.login != true){
+  const {islogin,userIdRol,logIn,logOut} = this.context;
+  if(islogin != true){
     window.location.replace("/login");
   }
 }
+handleLogoutClick() {
+  const {islogin,userIdRol,logIn,logOut} = this.context;
+  this.isLoggedIn = false;
+  logOut();
+  window.location.replace("/");
+  
+}
   render() {
+    const {islogin,userIdRol,logIn,logOut} = this.context;
     let i = 0;
-    let renderLinks = [];
     const { dataUser } = this.state;
     //dataUser && console.log(dataUser.data.map(item => item));
     return(
@@ -72,13 +81,17 @@ handleLogStatus(){
             <Sidebar>
             <Menu iconShape="square">
               {dataUser && dataUser.data.map(item =>  <MenuItem><Link to={"/powerbi/"+item.accessToken+"/"+item.id}>{item.nombre}</Link></MenuItem> )}
+              {userIdRol == 1 ? 
                 <SubMenu title="Sub Component 1" label="ABM">
-                  <MenuItem><Link to="/usuarios">Usuarios</Link></MenuItem>
-                  <MenuItem><Link to="/roles">Roles</Link></MenuItem>
-                  <MenuItem><Link to="/tablero">Tableros</Link></MenuItem>
-                  <MenuItem><Link to="/tablerosRoles">Tableros Roles</Link></MenuItem>
-                  
+                <MenuItem><Link to="/usuarios">Usuarios</Link></MenuItem>
+                <MenuItem><Link to="/roles">Roles</Link></MenuItem>
+                <MenuItem><Link to="/tablero">Tableros</Link></MenuItem>
+                <MenuItem><Link to="/tablerosRoles">Tableros Roles</Link></MenuItem>
+                <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>
                 </SubMenu>
+                : <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>
+              }
+                
             </Menu>
           </Sidebar>
         </div>

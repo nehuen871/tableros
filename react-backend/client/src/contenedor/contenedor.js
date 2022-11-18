@@ -11,7 +11,8 @@ export default class SidebarMenu extends React.Component {
         super(props);
     }
     componentDidMount(){
-        if(this.props.login != true){
+        const {islogin,userIdRol,logIn,logOut} = this.context;
+        if(islogin != true){
             window.location.replace("/login");
         }
     }
