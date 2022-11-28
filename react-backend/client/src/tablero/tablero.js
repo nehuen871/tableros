@@ -1,7 +1,7 @@
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
-import '/opt/tableroAPP2/react-backend/client/src/tablero/DataTableDemo.css';
+import '/opt/tableros/react-backend/client/src/tablero/DataTableDemo.css';
 import '../styles/index.css';
 import React, { Component } from 'react';
 import { classNames } from 'primereact/utils';
