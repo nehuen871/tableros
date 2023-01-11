@@ -87,6 +87,7 @@ handleLogoutClick() {
                 <MenuItem><Link to="/roles">Roles</Link></MenuItem>
                 <MenuItem><Link to="/tablero">Tableros</Link></MenuItem>
                 <MenuItem><Link to="/tablerosRoles">Tableros Roles</Link></MenuItem>
+                <MenuItem><Link to="/comentarios">Comentarios</Link></MenuItem>
                 <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>
                 </SubMenu>
                 : <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>

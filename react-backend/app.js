@@ -12,6 +12,7 @@ var tablerohRouter = require('./routes/tablero');
 var rolesRouter = require('./routes/roles');
 var tablerosRolesRouter = require('./routes/rolesTableros');
 var powerBiRoutes = require('./routes/powerBi');
+var comentariosRouter = require('./routes/comentarios');
 var app = express();
 
 // view engine setup
@@ -31,6 +32,7 @@ app.use('/auth', authRouter);
 app.use('/roles', rolesRouter);
 app.use('/powerbi', powerBiRoutes);
 app.use('/tablerosroles', tablerosRolesRouter);
+app.use('/comentarios', comentariosRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

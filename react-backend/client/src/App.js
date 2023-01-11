@@ -11,6 +11,7 @@ import Contenedor from './contenedor/contenedor';
 import Usuarios from  './usuarios/tablero';
 import Roles from './roles/tablero';
 import RolesTableros from './rolesTableros/tablero';
+import ComentariosTableros from './comentarios/comentariosTable';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="roles" element={<Roles />}/>
           <Route path="powerbi/:token/:id" element={<PowerBiComponente />}/>
           <Route path="tablerosRoles" element={<RolesTableros />}/>
+          <Route path="comentarios" element={<ComentariosTableros />}/>
         </Route>
         <Route path="/login" element={<Login />}/>
       </Routes>

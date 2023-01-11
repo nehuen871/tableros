@@ -3,11 +3,13 @@ import { PowerBIEmbed } from 'powerbi-client-react';
 import { models } from 'powerbi-client';
 import "../styles/powerBi.css"
 import { useLocation, useParams } from "react-router-dom";
+import Comentarios from "../comentarios/comentarios"
 /*https://app.powerbi.com/reportEmbed?reportId=37f58113-3e68-464a-bba2-366538375822&autoAuth=true&ctid=2377472e-8004-4648-8456-bd9687afa150
 https://app.powerbi.com/view?r=eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjNzBiMzUzIiwidCI6IjIzNzc0NzJlLTgwMDQtNDY0OC04NDU2LWJkOTY4N2FmYTE1MCIsImMiOjR9*/
 class PowerBiComponente extends React.Component {
     render() {
         return(
+            <div>
             <div className="contnedorPowerBi col-md-12">
                 <PowerBIEmbed
                     embedConfig = {{
@@ -41,7 +43,11 @@ class PowerBiComponente extends React.Component {
                         window.report = embeddedReport;
                     }}
                 />
-        </div>
+            </div>
+            <div>
+                <Comentarios />
+            </div>
+            </div>
         );
     }
 }
