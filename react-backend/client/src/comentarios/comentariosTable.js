@@ -22,9 +22,14 @@ import './DataTableDemo.css';
 
 export default class Comentarios extends React.Component {
     emptyProduct = {
-        idtablerohasroles:null,
-        tableros_idtableros: null,
-        roles_idroles: null
+        idcomentarios:null,
+        comentario: null,
+        usuarios_idusuarios: null,
+        usuarios_roles_idroles: null,
+        fecha: null,
+        categoria: null,
+        estado: null,
+        tableros_idtableros: null
     };
     constructor(props) {
         super(props);
@@ -40,12 +45,14 @@ export default class Comentarios extends React.Component {
         };
 
         this.productService = new ProductService();
+        this.leftToolbarTemplate = this.leftToolbarTemplate.bind(this);
         this.rightToolbarTemplate = this.rightToolbarTemplate.bind(this);
         this.imageBodyTemplate = this.imageBodyTemplate.bind(this);
         this.ratingBodyTemplate = this.ratingBodyTemplate.bind(this);
         this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
         this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
 
+        this.openNew = this.openNew.bind(this);
         this.hideDialog = this.hideDialog.bind(this);
         this.saveProduct = this.saveProduct.bind(this);
         this.editProduct = this.editProduct.bind(this);
@@ -63,6 +70,14 @@ export default class Comentarios extends React.Component {
     }
     componentDidMount() {
         this.productService.getProducts().then(data => this.setState({ products:data }));
+    }
+
+    openNew() {
+        this.setState({
+            product: this.emptyProduct,
+            submitted: false,
+            productDialog: true
+        });
     }
 
     hideDialog() {
@@ -86,8 +101,8 @@ export default class Comentarios extends React.Component {
         if (this.state.product.nombre.trim()) {
             let products = [...this.state.products];
             let product = {...this.state.product};
-            if (this.state.product.idroles) {
-                const index = this.findIndexById(this.state.product.idroles);
+            if (this.state.product.idcomentarios) {
+                const index = this.findIndexById(this.state.product.idcomentarios);
 
                 products[index] = product;
                 this.productService.updateProducts({product});
@@ -115,6 +130,7 @@ export default class Comentarios extends React.Component {
             product: { ...product },
             productDialog: true
         });
+        this.productService.cambiarEstado(product);
     }
 
     confirmDeleteProduct(product) {
@@ -125,7 +141,7 @@ export default class Comentarios extends React.Component {
     }
 
     deleteProduct() {
-        let products = this.state.products.filter(val => val.idroles !== this.state.product.idroles);
+        let products = this.state.products.filter(val => val.idcomentarios !== this.state.product.idcomentarios);
         this.setState({
             products,
             deleteProductDialog: false,
@@ -139,7 +155,7 @@ export default class Comentarios extends React.Component {
     findIndexById(id) {
         let index = -1;
         for (let i = 0; i < this.state.products.length; i++) {
-            if (this.state.products[i].idroles === id) {
+            if (this.state.products[i].idcomentarios === id) {
                 index = i;
                 break;
             }
@@ -228,6 +244,14 @@ export default class Comentarios extends React.Component {
 
         this.setState({ product });
     }
+
+    leftToolbarTemplate() {
+        return (
+            <React.Fragment>
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={this.openNew} />
+            </React.Fragment>
+        )
+    }
     /**<Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={this.confirmDeleteSelected} disabled={!this.state.selectedProducts || !this.state.selectedProducts.length} /> */
     rightToolbarTemplate() {
         return (
@@ -254,7 +278,6 @@ export default class Comentarios extends React.Component {
         return (
             <React.Fragment>
                 <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => this.editProduct(rowData)} />
-                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => this.confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
     }
@@ -268,23 +291,10 @@ export default class Comentarios extends React.Component {
                 </span>
             </div>
         );
-        const deleteProductDialogFooter = (
-            <React.Fragment>
-                <Button label="No" icon="pi pi-times" className="p-button-text" onClick={this.hideDeleteProductDialog} />
-                <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={this.deleteProduct} />
-            </React.Fragment>
-        );
-        const deleteProductsDialogFooter = (
-            <React.Fragment>
-                <Button label="No" icon="pi pi-times" className="p-button-text" onClick={this.hideDeleteProductsDialog} />
-                <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={this.deleteSelectedProducts} />
-            </React.Fragment>
-        );
 
         return (
             <div className="datatable-crud-demo">
                 <Toast ref={(el) => this.toast = el} />
-
                 <div className="card">
                     <DataTable ref={(el) => this.dt = el} value={this.state.products} selection={this.state.selectedProducts} onSelectionChange={(e) => this.setState({ selectedProducts: e.value })}
                         dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
@@ -292,29 +302,17 @@ export default class Comentarios extends React.Component {
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
                         globalFilter={this.state.globalFilter} header={header} responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                        <Column field="idcomentarios" header="idcomentarios" sortable style={{ minWidth: '12rem' }}></Column>
                         <Column field="comentario" header="comentario" sortable style={{ minWidth: '12rem' }}></Column>
                         <Column field="usuarios_idusuarios" header="usuarios_idusuarios" sortable style={{ minWidth: '12rem' }}></Column>
                         <Column field="usuarios_roles_idroles" header="usuarios_roles_idroles" sortable style={{ minWidth: '16rem' }}></Column>
+                        <Column field="tableros_idtableros" header="tableros_idtableros" sortable style={{ minWidth: '16rem' }}></Column>
                         <Column field="fecha" header="fecha" sortable style={{ minWidth: '16rem' }}></Column>
                         <Column field="categoria" header="categoria" sortable style={{ minWidth: '16rem' }}></Column>
                         <Column field="estado" header="estado" sortable style={{ minWidth: '16rem' }}></Column>
                         <Column body={this.actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                     </DataTable>
                 </div>
-
-                <Dialog visible={this.state.deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={this.hideDeleteProductDialog}>
-                    <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
-                        {this.state.product && <span>Are you sure you want to delete <b>{this.state.product.name}</b>?</span>}
-                    </div>
-                </Dialog>
-
-                <Dialog visible={this.state.deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={this.hideDeleteProductsDialog}>
-                    <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
-                        {this.state.product && <span>Are you sure you want to delete the selected items?</span>}
-                    </div>
-                </Dialog>
             </div>
         );
     }

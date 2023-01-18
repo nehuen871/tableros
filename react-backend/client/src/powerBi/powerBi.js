@@ -45,7 +45,7 @@ class PowerBiComponente extends React.Component {
                 />
             </div>
             <div>
-                <Comentarios />
+                <Comentarios idtablero={this.props.params.id}/>
             </div>
             </div>
         );
