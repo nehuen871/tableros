@@ -1,57 +1,43 @@
-import React, { useState } from 'react';
-import {
-  MDBNavbar,
-  MDBNavbarNav,
-  MDBNavbarItem,
-  MDBNavbarLink,
-  MDBNavbarToggler,
-  MDBContainer,
-  MDBIcon,
-  MDBCollapse
-} from 'mdb-react-ui-kit';
-
-export default function App() {
-  const [showBasic, setShowBasic] = useState(false);
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import { Justify,PersonCircle } from 'react-bootstrap-icons';
+import SidebarMenu from '../contenedor/contenedor'
+function App() {
   return (
-    <header>
-      <MDBNavbar expand='lg' light bgColor='white'>
-        <MDBContainer fluid>
-          <MDBNavbarToggler
-            onClick={() => setShowBasic(!showBasic)}
-            aria-controls='navbarExample01'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <MDBIcon fas icon='bars' />
-          </MDBNavbarToggler>
-          <MDBCollapse show={showBasic}>
-            <MDBNavbarNav right className='mb-2 mb-lg-0'>
-              <MDBNavbarItem active>
-                <MDBNavbarLink aria-current='page' href='#'>
-                  Home
-                </MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink href='#'>Features</MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink href='#'>Pricing</MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink href='#'>About</MDBNavbarLink>
-              </MDBNavbarItem>
-            </MDBNavbarNav>
-          </MDBCollapse>
-        </MDBContainer>
-      </MDBNavbar>
-
-      <div className='p-5 text-center bg-light'>
-        <h1 className='mb-3'>Heading</h1>
-        <h4 className='mb-3'>Subheading</h4>
-        <a className='btn btn-primary' href='' role='button'>
-          Call to action
-        </a>
-      </div>
-    </header>
+    <>
+      {[false].map((expand) => (
+        <Navbar key={expand} bg="light" expand={expand} className="mb-3">
+          <Container fluid>
+            <Navbar.Brand className="position-absolute bottom-0 end-0"href="#">Navbar Offcanvas<PersonCircle/></Navbar.Brand>
+            <Navbar.Toggle  aria-controls={`offcanvasNavbar-expand-${expand}`}>
+              <Justify/>
+            </Navbar.Toggle>
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="start"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                  Offcanvas
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                  <SidebarMenu />
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      ))}
+    </>
   );
 }
+
+export default App;

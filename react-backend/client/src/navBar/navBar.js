@@ -60,7 +60,7 @@ componentDidMount() {
 handleLogStatus(){
   const {islogin,userIdRol,logIn,logOut} = this.context;
   if(islogin != true){
-    window.location.replace("/login");
+    //window.location.replace("/login");
   }
 }
 handleLogoutClick() {

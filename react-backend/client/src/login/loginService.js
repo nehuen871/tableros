@@ -17,7 +17,6 @@ export class LogintService {
             });
             return response.json(); // parses JSON response into native JavaScript objects
           }
-          
           let test = postData('/auth/', data); // JSON data parsed by `data.json()` call
           return test;
     }
