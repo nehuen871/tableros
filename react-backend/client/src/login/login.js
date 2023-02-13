@@ -13,7 +13,7 @@ import {
 } from "react-router-dom";
 import {useEffect,useState} from 'react';
 import { LogintService } from './loginService';
-import Contenedor from '../contenedor/contenedor';
+import ContenedorHome from '../contenedorhome/contenedorHome';
 import UserContext,{ContextLogin} from '../context/context'
 let row = [];
 
@@ -46,21 +46,22 @@ class Login extends React.Component{
     this.logintService.getUser({row:row[0]}).then(data => this.setState({dataUser:data})).then(this.handleLogStatus());
   }
   handleLogStatus(){
-    const {islogin,userIdRol,logIn,logOut} = this.context;
+    let {islogin,userIdRol,userId,userName,logIn,logOut} = this.context;
     
     if(this.state.dataUser != null){
       console.log(this.state.dataUser);
       logIn(true,this.state.dataUser.data.roles_idroles);
-      this.isLoggedIn = true;
+      islogin = true;
     }
   }
   handleLogoutClick() {
     const {islogin,userIdRol,logIn,logOut} = this.context;
-    this.isLoggedIn = false;
+    islogin = false;
     logOut();
   }
   render() {
-    const isLoggedIn = this.isLoggedIn;
+    const {islogin,userIdRol,logIn,logOut} = this.context;
+    const isLoggedIn = islogin;
 
     return (
       <div>    
@@ -99,7 +100,7 @@ class Login extends React.Component{
 
           </div>
         </div>
-        </MDBContainer> : <Contenedor login={isLoggedIn} roles_idroles={this.state.dataUser.data.roles_idroles}/>
+        </MDBContainer> : <ContenedorHome login={isLoggedIn} roles_idroles={this.state.dataUser.data.roles_idroles}/>
       }
       </div>
     );

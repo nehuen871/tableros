@@ -6,30 +6,38 @@ export class ContextLogin extends Component{
         super(props);
         this.state = {
             islogin: false,
-            userIdRol: 0
+            userIdRol: 0,
+            userName: "",
+            userId:0
         }
     }
 
 
-    logIn = (log,rol) => {
+    logIn = (log,rol,id,name) => {
         this.setState({
             islogin:log,
-            userIdRol:rol
+            userIdRol:rol,
+            userId:id,
+            userName:name
         });
     }
     logOut = () => {
         this.setState({
             islogin:false,
-            userIdRol:0
+            userIdRol:0,
+            userId:0,
+            userName:""
         });
     }
     render(){
-        const {islogin,userIdRol} = this.state
+        const {islogin,userIdRol,userId,userName} = this.state
         const {logIn,logOut} = this;
         return(
             <UserContext.Provider value={{
                 islogin,
                 userIdRol,
+                userId,
+                userName,
                 logIn,
                 logOut
             }}>

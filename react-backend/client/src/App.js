@@ -12,20 +12,24 @@ import Usuarios from  './usuarios/tablero';
 import Roles from './roles/tablero';
 import RolesTableros from './rolesTableros/tablero';
 import ComentariosTableros from './comentarios/comentariosTable';
-
+import Home from './home/home';
+import ContenedorHome from './contenedorhome/contenedorHome';
 class App extends Component {
   render() {
     return (
       <Routes>
-        <Route path="/" element={<Contenedor />}>
-          <Route path="tablero" element={<Tabla />}/>
-          <Route path="usuarios" element={<Usuarios />}/>
-          <Route path="roles" element={<Roles />}/>
-          <Route path="powerbi/:token/:id" element={<PowerBiComponente />}/>
-          <Route path="tablerosRoles" element={<RolesTableros />}/>
-          <Route path="comentarios" element={<ComentariosTableros />}/>
+        <Route path="/" element={<Login />}>
+          <Route path="contenedorHome" element={<ContenedorHome />}>
+            <Route path="tablero" element={<Tabla />}/>
+            <Route path="usuarios" element={<Usuarios />}/>
+            <Route path="roles" element={<Roles />}/>
+            <Route path="powerbi/:token/:id" element={<PowerBiComponente />}/>
+            <Route path="tablerosRoles" element={<RolesTableros />}/>
+            <Route path="comentarios" element={<ComentariosTableros />}/>
+            <Route path="contenedor" element={<Contenedor />}/>
+            <Route path="home" element={<Home />}/>
+          </Route>
         </Route>
-        <Route path="/login" element={<Login />}/>
       </Routes>
     );
   }

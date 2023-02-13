@@ -80,19 +80,18 @@ handleLogoutClick() {
         <div>
             <Sidebar>
             <Menu iconShape="square">
-              {dataUser && dataUser.data.map(item =>  <MenuItem><Link to={"/powerbi/"+item.accessToken+"/"+item.id}>{item.nombre}</Link></MenuItem> )}
-              {userIdRol == 1 ? 
+              {userIdRol == 1 &&
                 <SubMenu title="Sub Component 1" label="ABM">
-                <MenuItem><Link to="/usuarios">Usuarios</Link></MenuItem>
-                <MenuItem><Link to="/roles">Roles</Link></MenuItem>
-                <MenuItem><Link to="/tablero">Tableros</Link></MenuItem>
-                <MenuItem><Link to="/tablerosRoles">Tableros Roles</Link></MenuItem>
-                <MenuItem><Link to="/comentarios">Comentarios</Link></MenuItem>
-                <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>
+                <MenuItem><Link to="/contenedorHome/usuarios">Usuarios</Link></MenuItem>
+                <MenuItem><Link to="/contenedorHome/roles">Roles</Link></MenuItem>
+                <MenuItem><Link to="/contenedorHome/tablero">Tableros</Link></MenuItem>
+                <MenuItem><Link to="/contenedorHome/tablerosRoles">Tableros Roles</Link></MenuItem>
+                <MenuItem><Link to="/contenedorHome/comentarios">Comentarios</Link></MenuItem>
+                <MenuItem><Link to="/contenedorHome/home">Home</Link></MenuItem>
                 </SubMenu>
-                : <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>
               }
-                
+                <MenuItem><Link to="/contenedorHome/home">Home</Link></MenuItem>
+                 <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>
             </Menu>
           </Sidebar>
         </div>
@@ -102,3 +101,5 @@ handleLogoutClick() {
 }
 
 SidebarMenu.contextType = UserContext;
+
+//{dataUser && dataUser.data.map(item =>  <MenuItem><Link to={"/powerbi/"+item.accessToken+"/"+item.id}>{item.nombre}</Link></MenuItem> )}

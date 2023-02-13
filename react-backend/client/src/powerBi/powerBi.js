@@ -9,7 +9,6 @@ https://app.powerbi.com/view?r=eyJrIjoiZGQ0YWMwYTctZDZkNS00OTg3LWJlNmEtMDljY2VjN
 class PowerBiComponente extends React.Component {
     render() {
         return(
-            <div>
             <div className="contnedorPowerBi col-md-12">
                 <PowerBIEmbed
                     embedConfig = {{
@@ -43,10 +42,6 @@ class PowerBiComponente extends React.Component {
                         window.report = embeddedReport;
                     }}
                 />
-            </div>
-            <div>
-                <Comentarios idtablero={this.props.params.id}/>
-            </div>
             </div>
         );
     }
