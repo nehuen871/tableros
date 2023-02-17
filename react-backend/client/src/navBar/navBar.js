@@ -89,8 +89,8 @@ handleLogoutClick() {
                 <MenuItem><Link to="/contenedorHome/comentarios">Comentarios</Link></MenuItem>
                 </SubMenu>
               }
-                <MenuItem><Link to="/contenedorHome/home">Home</Link></MenuItem>
-                 <MenuItem><a onClick={this.handleLogoutClick}>Log Out</a></MenuItem>
+                <MenuItem><Link to="/contenedorHome/home">Inicio</Link></MenuItem>
+                 <MenuItem><a onClick={this.handleLogoutClick}>Salir</a></MenuItem>
             </Menu>
           </Sidebar>
         </div>

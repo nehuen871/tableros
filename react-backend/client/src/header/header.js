@@ -83,7 +83,7 @@ export default class HeaderApp extends React.Component {
                 >
                   <Offcanvas.Header closeButton>
                     <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                      Offcanvas
+                      Tableros
                     </Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
