@@ -6,8 +6,12 @@ import {
     MDBCardHeader,
     MDBBtn
   } from 'mdb-react-ui-kit';
-  import { ProductService } from '../rolesTableros/ProductService';
-  import { TableroService } from '../tablero/ProductService';
+import { ProductService } from '../rolesTableros/ProductService';
+import { TableroService } from '../tablero/ProductService';
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 export default class Home extends React.Component {
     static contextType = UserContext;
     constructor(props) {
@@ -77,7 +81,7 @@ export default class Home extends React.Component {
                             <MDBCardHeader>{item.nombre}</MDBCardHeader>
                             <MDBCardBody>
                                 <MDBBtn href={"/contenedorHome/powerbi/"+item.accessToken+"/"+item.id}>Acceder</MDBBtn>
-                                <MDBBtn href={"/contenedorHome/enviarcomentarios/"+item.idtableros}>Comenatrios</MDBBtn>
+                                <MDBBtn><Link to={"/contenedorHome/enviarcomentarios/"+item.idtableros}>Comenatrios</Link></MDBBtn>
                             </MDBCardBody>
                             </MDBCard>
                             )                                  
