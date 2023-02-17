@@ -1,7 +1,8 @@
 import React from 'react';
 import { MDBInput, MDBCheckbox, MDBBtn,MDBTextArea } from 'mdb-react-ui-kit';
 import withRouter from '../paramsUrl/paramsUrl';
-import UserContext,{ContextLogin} from '../context/context'
+import UserContext,{ContextLogin} from '../context/context';
+import Moment from 'moment';
 class Comentarios extends React.Component {
     emptyProduct = {
         message: "",
@@ -35,12 +36,11 @@ class Comentarios extends React.Component {
             comentario: this.state.product.message,
             usuarios_idusuarios: userId,
             usuarios_roles_idroles: userIdRol,
-            fecha:new Date().getTime(),
+            fecha:Moment().format('YYYY/MM/DD'),
             categoria:this.state.product.categoria,
             estado:"Abierto",
             tableros_idtableros:this.props.params.idtablero,
         };
-        console.log(data);
         this.postData("/comentarios/insert/",{data});
         e.preventDefault();
     }

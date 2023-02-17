@@ -80,7 +80,7 @@ export default class Home extends React.Component {
                             item => <MDBCard alignment='center'>
                             <MDBCardHeader>{item.nombre}</MDBCardHeader>
                             <MDBCardBody>
-                                <MDBBtn href={"/contenedorHome/powerbi/"+item.accessToken+"/"+item.id}>Acceder</MDBBtn>
+                                <MDBBtn><Link to={"/contenedorHome/powerbi/"+item.accessToken+"/"+item.id} style={{color:"white",textDecoration:"none"}}>Acceder</Link></MDBBtn>
                                 <MDBBtn><Link to={"/contenedorHome/enviarcomentarios/"+item.idtableros} style={{color:"white",textDecoration:"none"}}>Comenatrios</Link></MDBBtn>
                             </MDBCardBody>
                             </MDBCard>
