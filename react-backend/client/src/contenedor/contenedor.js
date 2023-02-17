@@ -25,7 +25,7 @@ export default class SidebarMenu extends React.Component {
                             props => {
                                 const {islogin,userIdRol,logIn,logOut} = this.context;
                                 return(
-                                    <div className="col-sm-auto"><Sidebar roles_idroles={userIdRol} login={islogin}/></div>
+                                    <div className="col-sm-auto"><Sidebar roles_idroles={userIdRol} login={islogin} /></div>
                                 );
                             }
                         }
@@ -35,3 +35,5 @@ export default class SidebarMenu extends React.Component {
         )
     }
 }
+
+SidebarMenu.contextType = UserContext;

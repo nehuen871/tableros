@@ -1,26 +1,50 @@
 import React from 'react';
-import {
-    BrowserRouter as Router,
-    Link
-  } from "react-router-dom";
-  export default class Comentarios extends React.Component {
+import { MDBInput, MDBCheckbox, MDBBtn,MDBTextArea } from 'mdb-react-ui-kit';
+import withRouter from '../paramsUrl/paramsUrl';
+import UserContext,{ContextLogin} from '../context/context'
+class Comentarios extends React.Component {
+    emptyProduct = {
+        message: "",
+        categoria: "Error"
+    };
     constructor(props) {
         super(props);
-        this.state = {value: 'Please write an essay about your favorite DOM element.',valueSelect: 'coconut'};
+        this.state = {
+            product : this.emptyProduct,
+            value: 'Please write an essay about your favorite DOM element.',
+            valueSelect: 'coconut'
+        };
         this.postData = this.postData.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
+    onInputChange(e,name){
+        const val = (e.target && e.target.value) || '';
+        let product = {...this.state.product};
+        product[`${name}`] = val;
+
+        this.setState({ product });
+    }
     handleChange(event) {    
         this.setState({value: event.target.value}); 
         this.setState({valueSelect: event.target.value});
     }
-    handleSubmit(event) {
-        alert('Your favorite flavor is: ' + this.state.valueSelect);
-        alert('An essay was submitted: ' + this.state.value);
-        event.preventDefault();
+    handleSubmit(e) {
+        const {islogin,userIdRol,userId,logIn,logOut} = this.context;
+        let data = {
+            comentario: this.state.product.message,
+            usuarios_idusuarios: userId,
+            usuarios_roles_idroles: userIdRol,
+            fecha:new Date().getTime(),
+            categoria:this.state.product.categoria,
+            estado:"Abierto",
+            tableros_idtableros:this.props.params.idtablero,
+        };
+        console.log(data);
+        this.postData("/comentarios/insert/",{data});
+        e.preventDefault();
     }
+
     async postData(url = '', data = {}) {
         let i = 0;
         const that = this;
@@ -48,18 +72,21 @@ import {
     render() {
         return(
           <div>
-            <form onSubmit={this.handleSubmit}>
-            <input type="text" value={this.props.roles_idroles} />
-                <select>
-                    <option value="grapefruit">Grapefruit</option>
-                    <option value="lime">Lime</option>
-                    <option selected value="coconut">Coconut</option>
-                    <option value="mango">Mango</option>
+            <form id='form' className='text-center' style={{ width: '100%', maxWidth: '300px' }} onSubmit={this.handleSubmit}>
+                <h2>Contact us</h2>
+                <MDBTextArea wrapperClass='mb-4' label='Message' onChange={(e) => this.onInputChange(e, 'message')} value={this.state.product.message}/>
+                <select onChange={(e) => this.onInputChange(e, 'categoria')} value={this.state.product.categoria}>
+                    <option>Error</option>
+                    <option>Mejora</option>
                 </select>
-                <label>Essay:<textarea value={this.state.value} onChange={this.handleChange} /></label>
-                <input type="submit" value="Submit" />
+                <MDBBtn color='primary' block className='my-4'>
+                    Send
+                </MDBBtn>
             </form>
           </div> 
         );
     }
 }
+
+export default withRouter(Comentarios);
+Comentarios.contextType = UserContext;

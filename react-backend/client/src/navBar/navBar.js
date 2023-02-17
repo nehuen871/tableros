@@ -87,7 +87,6 @@ handleLogoutClick() {
                 <MenuItem><Link to="/contenedorHome/tablero">Tableros</Link></MenuItem>
                 <MenuItem><Link to="/contenedorHome/tablerosRoles">Tableros Roles</Link></MenuItem>
                 <MenuItem><Link to="/contenedorHome/comentarios">Comentarios</Link></MenuItem>
-                <MenuItem><Link to="/contenedorHome/home">Home</Link></MenuItem>
                 </SubMenu>
               }
                 <MenuItem><Link to="/contenedorHome/home">Home</Link></MenuItem>

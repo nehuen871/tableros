@@ -50,7 +50,7 @@ class Login extends React.Component{
     
     if(this.state.dataUser != null){
       console.log(this.state.dataUser);
-      logIn(true,this.state.dataUser.data.roles_idroles);
+      logIn(true,this.state.dataUser.data.roles_idroles,this.state.dataUser.data.idusuarios,this.state.dataUser.data.nombre);
       islogin = true;
     }
   }

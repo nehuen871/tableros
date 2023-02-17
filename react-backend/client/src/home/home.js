@@ -61,9 +61,9 @@ export default class Home extends React.Component {
       }
       handleLogoutClick() {
         const {logOut} = this.context;
-        this.isLoggedIn = false;
-        logOut();
-        window.location.replace("/");
+        //this.isLoggedIn = false;
+        //logOut();
+        //window.location.replace("/");
         
       }
     render() {
@@ -76,8 +76,8 @@ export default class Home extends React.Component {
                             item => <MDBCard alignment='center'>
                             <MDBCardHeader>{item.nombre}</MDBCardHeader>
                             <MDBCardBody>
-                                <MDBBtn href={"/powerbi/"+item.accessToken+"/"+item.id}>Acceder</MDBBtn>
-                                <MDBBtn href={"/comentarios/"+item.accessToken+"/"+item.id}>Comenatrios</MDBBtn>
+                                <MDBBtn href={"/contenedorHome/powerbi/"+item.accessToken+"/"+item.id}>Acceder</MDBBtn>
+                                <MDBBtn href={"/contenedorHome/enviarcomentarios/"+item.idtableros}>Comenatrios</MDBBtn>
                             </MDBCardBody>
                             </MDBCard>
                             )                                  

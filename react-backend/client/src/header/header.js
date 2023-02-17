@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Justify,PersonCircle } from 'react-bootstrap-icons';
 import SidebarMenu from '../contenedor/contenedor'
-function App() {
+function HeaderApp() {
   return (
     <>
       {[false].map((expand) => (
@@ -40,4 +40,4 @@ function App() {
   );
 }
 
-export default App;
+export default HeaderApp;

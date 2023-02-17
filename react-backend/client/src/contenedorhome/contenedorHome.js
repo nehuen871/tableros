@@ -20,10 +20,9 @@ export default class ContenedorHome extends React.Component {
         return(
             <div className='row'>
                 <div className='col-md-12'>
-                    <Outlet roles_idroles={this.props.roles_idroles}/>
+                    <Outlet roles_idroles={this.props.roles_idroles} idusuario={this.props.idusuario}/>
                 </div>
             </div>
         )
     }
 }
-
