@@ -74,19 +74,18 @@ export default class Home extends React.Component {
         let i = 0;
         const { dataUser } = this.state;
         return(
-            <div className='row'>
-                <div className="col-md-3">
+            <div className='row d-flex justify-content-center mt-5'>
                         {dataUser && dataUser.data.map(
-                            item => <MDBCard alignment='center'>
+                            item => <div className="col-md-3"><MDBCard alignment='center'>
                             <MDBCardHeader>{item.nombre}</MDBCardHeader>
                             <MDBCardBody>
-                                <MDBBtn><Link to={"/contenedorHome/powerbi/"+item.accessToken+"/"+item.id} style={{color:"white",textDecoration:"none"}}>Acceder</Link></MDBBtn>
-                                <MDBBtn><Link to={"/contenedorHome/enviarcomentarios/"+item.idtableros} style={{color:"white",textDecoration:"none"}}>Comenatrios</Link></MDBBtn>
+                                <MDBBtn style={{backgroundColor:"#fbbc04",borderColor:"#fbbc04"}}><Link to={"/contenedorHome/powerbi/"+item.accessToken+"/"+item.id} style={{color:"black",textDecoration:"none"}}>Acceder</Link></MDBBtn>
+                                <MDBBtn className="ms-1" style={{backgroundColor:"#fbbc04",borderColor:"#fbbc04"}}><Link to={"/contenedorHome/enviarcomentarios/"+item.idtableros} style={{color:"black",textDecoration:"none"}}>Comenatrios</Link></MDBBtn>
                             </MDBCardBody>
                             </MDBCard>
+                            </div>
                             )                                  
                         }
-                </div>
             </div>
         )
     }
