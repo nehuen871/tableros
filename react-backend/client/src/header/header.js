@@ -26,14 +26,11 @@ export default class HeaderApp extends React.Component {
         return(
           <>
           {[false].map((expand) => (
-            <Navbar key={expand} bg="" expand={expand} className="mb-3" style={{ backgroundColor:"#6c757d" }}>
+            <Navbar key={expand} bg="" expand={expand} className="mb-3" style={{ backgroundColor:"#6c757d",height: "80px"}}>
               <Container fluid>
-                
-                <Navbar.Brand className="position-absolute bottom-0 end-0"href="#">{userName}<PersonCircle style={{left:"30px",top:"45px"}}/></Navbar.Brand>
-                
-                
+                <Navbar.Brand className="position-absolute bottom-0 end-0"href="#" style={{ height: "100%"}}>{userName}<PersonCircle style={{left:"30px",top:"45px",height:"40px",width: "40px"}}/></Navbar.Brand>
                 <Navbar.Toggle  aria-controls={`offcanvasNavbar-expand-${expand}`}>
-                  <Justify/>
+                  <Justify style={{left:"30px",top:"45px",height:"40px",width: "40px"}}/>
                 </Navbar.Toggle>
                 <Navbar.Offcanvas
                   id={`offcanvasNavbar-expand-${expand}`}
@@ -51,8 +48,8 @@ export default class HeaderApp extends React.Component {
                     </Nav>
                   </Offcanvas.Body>
                 </Navbar.Offcanvas>
-                <div className="position-absolute bottom-0 end-0">
-                  <Image src={'/LOGOBA-Principalsinclaim-Blanco.png'} style={{ width: "7%", height: "7%",position:"relative",left:"30px",top:"55px"}}/>
+                <div className="position-absolute" style={{display: "inline",width: "80px",height: "80px",left: "65px"}}>
+                  <Image src={'/LOGOBA-Principalsinclaim-Blanco.png'} style={{ width: "100%", height: "100%"}}/>
                 </div>
               </Container>
             </Navbar>
