@@ -49,7 +49,7 @@ export default class HeaderApp extends React.Component {
                   </Offcanvas.Body>
                 </Navbar.Offcanvas>
                 <div className="position-absolute" style={{display: "inline",width: "80px",height: "80px",left: "65px"}}>
-                  <Image src={'/LOGOBA-Principalsinclaim-Blanco.png'} style={{ width: "100%", height: "100%"}}/>
+                  <Image src={'/LOGOBABLANCO_PNG.png'} style={{ width: "100%", height: "100%"}}/>
                 </div>
               </Container>
             </Navbar>

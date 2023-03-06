@@ -71,16 +71,17 @@ class Comentarios extends React.Component {
     }
     render() {
         return(
-          <div>
-            <form id='form' className='text-center' style={{ width: '100%', maxWidth: '300px' }} onSubmit={this.handleSubmit}>
-                <h2>Contact us</h2>
-                <MDBTextArea wrapperClass='mb-4' label='Message' onChange={(e) => this.onInputChange(e, 'message')} value={this.state.product.message}/>
-                <select onChange={(e) => this.onInputChange(e, 'categoria')} value={this.state.product.categoria}>
+          <div >
+            <form id='form' className='justify-content-between mx-auto text-center' style={{ width: '100%', maxWidth: '500px' }} onSubmit={this.handleSubmit} >
+                <h2>Dejanos un comentario!</h2>
+                <MDBTextArea wrapperClass='mb-4' label='Mensaje' onChange={(e) => this.onInputChange(e, 'message')} value={this.state.product.message}/>
+                <label>Categoria: </label>
+                <select onChange={(e) => this.onInputChange(e, 'categoria')} value={this.state.product.categoria} style={{marginLeft:"10px" }}>
                     <option>Error</option>
                     <option>Mejora</option>
                 </select>
                 <MDBBtn color='primary' block className='my-4'>
-                    Send
+                    Emviar
                 </MDBBtn>
             </form>
           </div> 

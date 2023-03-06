@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyparser = require('body-parser');
-
+var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
@@ -13,12 +13,14 @@ var rolesRouter = require('./routes/roles');
 var tablerosRolesRouter = require('./routes/rolesTableros');
 var powerBiRoutes = require('./routes/powerBi');
 var comentariosRouter = require('./routes/comentarios');
+
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -33,6 +35,7 @@ app.use('/roles', rolesRouter);
 app.use('/powerbi', powerBiRoutes);
 app.use('/tablerosroles', tablerosRolesRouter);
 app.use('/comentarios', comentariosRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -66,7 +66,7 @@ class Login extends React.Component{
     return (
       <div>    
         {!isLoggedIn ? 
-        <MDBContainer className="p-3 my-5 d-flex flex-column w-50"> 
+        <MDBContainer className="p-3 my-5 d-flex flex-column" style={{width:"30%"}}> 
         <MDBInput wrapperClass='mb-4' label='Quit' id='form1' type='email' value={this.state.email || ""} onChange={this.handleEmailChange}/>
         <MDBInput wrapperClass='mb-4' label='Contraseña' id='form2' type='password' value={this.state.password || ""} onChange={this.handlePasswordChange}/>
         <MDBBtn className="mb-4" style={{backgroundColor:"#fbbc04",borderColor:"#fbbc04",color:"black"}} onClick={this.handleLoginClick}>Acceder</MDBBtn>
