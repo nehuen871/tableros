@@ -47,9 +47,9 @@ class Login extends React.Component{
   }
   handleLogStatus(){
     let {islogin,userIdRol,userId,userName,logIn,logOut} = this.context;
-    
+    console.log(this.state.dataUser);
     if(this.state.dataUser != null){
-      console.log(this.state.dataUser);
+      //console.log(this.state.dataUser);
       logIn(true,this.state.dataUser.data.roles_idroles,this.state.dataUser.data.idusuarios,this.state.dataUser.data.nombre);
       islogin = true;
     }

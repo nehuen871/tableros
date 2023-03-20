@@ -5,7 +5,7 @@ const fetch = (...args) =>
 const mysqlConnection  = require('../db/db.js');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+  res.send('respond with a resource');
 });
 
 router.post('/', (req, res) => {
@@ -23,29 +23,31 @@ router.post('/', (req, res) => {
     }
   });
 });
-router.get('/adauth', (req, res) => {
-  let {user,pass} = req.body;
-  let url = "http://ad/cuentas/20333447658/validar";
-  let tokenAD = "";
-  let data = {
-    "usuario": "20333447658",
-    "password": "Troquel1"
-  };
-  const init = {
-    method: 'POST'
-  };
-  
-  fetch('http://ad/cuentas/20333447658/validar', init)
-  .then((response) => {
-    return response.json(); // or .text() or .blob() ...
-  })
-  .then((text) => {
-    console.log(text);
-    // text is the response body
-  })
-  .catch((e) => {
-    console.log( e.message);
-  });
+router.post('/adauth', (req, res) => {
+  let {quit,pass} = req.body;
+  response = "";
+  try {
+    let url = "https://servicios-hml.gcba.gob.ar/ad/v1.2/cuentas/"+quit;
+    const init = {
+      method: 'GET',
+      headers:{
+        'client_id': 'bf7188c38b194b0c941947cc39b9a964',
+        'client_secret': '428062620AB94bb6B0036f87D857325E'
+      }
+    };
+    fetch(url, init)
+    .then((response) => {
+      return response.json(); // or .text() or .blob() ...
+    })
+    .then((text) => {
+      res.json(text);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+    } catch (error) {
+      console.log(error);
+    }
 });
 
 module.exports = router;
