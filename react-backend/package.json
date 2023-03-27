@@ -16,6 +16,7 @@
     "jade": "^0.29.0",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
-    "node-fetch": "^3.3.0"
+    "node-fetch": "^3.3.0",
+    "terminate": "^2.6.1"
   }
 }

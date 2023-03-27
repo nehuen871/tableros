@@ -4,16 +4,6 @@ export class LogintService {
         let respuesta2 = {};
         async function adValidation(data){
           let url = "/auth/adAuth";
-          let responseAD = "";
-            let options = {
-              method: 'POST',
-              mode:'cors',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data)
-            };
-
             try {
               const response = await fetch(url, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -33,7 +23,12 @@ export class LogintService {
             catch (e) {
               console.log(e)
             }
-            await postData('/auth/',respuesta, data);  
+            if(respuesta.status != "ERROR"){
+              await postData('/auth/',respuesta, data);  
+            }else{
+              respuesta2 = 0;
+            }
+            
         }
         async function postData(url = '',validation={}, data = {}) {
             // Default options are marked with *
