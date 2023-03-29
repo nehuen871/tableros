@@ -37,17 +37,16 @@ class Login extends React.Component{
   handlePasswordChange(e){
     this.setState({password: e.target.value});
   }
-  handleLoginClick() {
+  async handleLoginClick() {
     row.pop();
     row.push({
       quit: this.state.email,
       pass: this.state.password
     });
-    this.logintService.getUser({row:row[0]}).then(data => this.setState({dataUser:data})).then(this.handleLogStatus());
+    await this.logintService.getUser({row:row[0]}).then(data => this.setState({dataUser:data}).then(this.handleLogStatus()));
   }
   async handleLogStatus(){
     let {islogin,userIdRol,userId,userName,logIn,logOut} = this.context;
-    console.log(this.state.dataUser);
     try {
       if(this.state.dataUser != null && this.state.dataUser != 0){
         await logIn(true,this.state.dataUser.data.roles_idroles,this.state.dataUser.data.idusuarios,this.state.dataUser.data.nombre);
